@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المغامر الصغير</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #fdf4ff; }
+        #game { max-width: 500px; margin: auto; padding: 20px; }
+        button { background: #d946ef; color: white; border: none; padding: 15px; border-radius: 20px; width: 80%; margin: 10px; }
+    </style>
+</head>
+<body>
+    <div id="game">
+        <h1>المغامر الصغير</h1>
+        <video id="video" autoplay playsinline style="width:100%; border-radius:20px;"></video>
+        <button id="snap" onclick="takePhoto()">التقط صورتك 📸</button>
+        <div id="output"></div>
+    </div>
+    <script>
+        // تسجيل الخدمة الذاتية (Service Worker)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('pwabuilder-sw.js');
+        }
+        async function initCamera() { try { const s = await navigator.mediaDevices.getUserMedia({video:true}); document.getElementById('video').srcObject = s; } catch(e) {} }
+        initCamera();
+    </script>
+</body>
+</html>
